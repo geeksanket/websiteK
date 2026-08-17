@@ -6,6 +6,8 @@ gsap.registerPlugin(ScrollTrigger)
 
 const STAGES = [
   { id: 'CODE', label: 'CODE', sub: 'Source compiled. Symbols resolved.' },
+  { id: 'GLFW', label: 'GLFW', sub: 'Window context created. Input layer attached.' },
+  { id: 'VEC4', label: 'VEC4', sub: 'Vectors normalized. Transform data prepared.' },
   { id: 'ENGINE', label: 'ENGINE', sub: 'Runtime initialized. Scene graph built.' },
   { id: 'GEOMETRY', label: 'GEOMETRY', sub: 'Vertices uploaded. Mesh instantiated.' },
   { id: 'LIGHT', label: 'LIGHTING', sub: 'Shadow maps computed. Probes sampled.' },
@@ -90,7 +92,7 @@ export default function CodeToWorld() {
         trigger: containerRef.current,
         start: 'top top',
         // Keep the staged world-building sequence pinned and responsive.
-        end: `+=${STAGES.length * 60}vh`,
+        end: `+=${STAGES.length * 85}vh`,
         pin: pinRef.current,
         scrub: 0.55,
         onUpdate: (self) => {

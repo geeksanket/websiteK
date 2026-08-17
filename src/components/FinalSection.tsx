@@ -106,6 +106,26 @@ export default function FinalSection() {
         <div className="absolute bottom-0 left-0 right-0" style={{ height: 1, background: 'linear-gradient(to right, transparent, rgba(201,168,76,0.2), transparent)' }} />
       </section>
 
+      <section className="relative py-24 px-8 md:px-16" style={{ background: '#060605', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
+        <div className="max-w-6xl mx-auto">
+          <span className="font-mono-label text-[10px] tracking-[0.35em]" style={{ color: 'rgba(201,168,76,0.35)' }}>CREDITS // PROJECT KURUKSHETRA</span>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div>
+              <h3 className="font-display font-bold tracking-[0.2em] text-2xl" style={{ color: 'var(--gold)' }}>TECH TEAM</h3>
+              <div className="mt-5 space-y-2 font-mono-label text-xs tracking-widest" style={{ color: 'rgba(232,224,208,0.6)' }}>
+                <div>VIRAL // VIRUS</div><div>GAURI // DHURANDAR</div><div>SANKET // MIAU</div>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-display font-bold tracking-[0.2em] text-2xl" style={{ color: 'var(--gold)' }}>ART TEAM</h3>
+              <div className="mt-5 space-y-2 font-mono-label text-xs tracking-widest" style={{ color: 'rgba(232,224,208,0.6)' }}>
+                <div>DARSHANA // ALL ROUNDER</div><div>NEEL // CORPORATE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer
         className="relative flex flex-col md:flex-row items-center justify-between px-8 md:px-16 py-8 gap-4"

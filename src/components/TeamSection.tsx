@@ -91,8 +91,8 @@ function TechCard({ member }: { member: TeamMember }) {
           style={{
             fontSize: '1.1rem',
             color: 'var(--foreground)',
-            opacity: 1,
-            transform: 'translateY(0)',
+            opacity: hovered ? 1 : 0,
+            transform: hovered ? 'translateY(0)' : 'translateY(8px)',
           }}
         >
           {member.name}
@@ -158,8 +158,8 @@ function ArtCard({ member }: { member: TeamMember }) {
           style={{
             fontSize: '1.1rem',
             color: 'var(--foreground)',
-            opacity: 1,
-            transform: 'translateY(0)',
+            opacity: hovered ? 1 : 0,
+            transform: hovered ? 'translateY(0)' : 'translateY(8px)',
           }}
         >
           {member.name}

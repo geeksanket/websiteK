@@ -34,8 +34,29 @@ const ENGINE_SYSTEMS = [
     visual: 'logic',
   },
   {
+    id: 'INPUT',
+    label: '05 // INPUT',
+    desc: 'Input actions mapped. Controllers and keyboard signals ready.',
+    color: 'rgba(201,168,76,1)',
+    visual: 'logic',
+  },
+  {
+    id: 'AUDIO',
+    label: '06 // AUDIO',
+    desc: 'Spatial mixer online. Event channels standing by.',
+    color: 'rgba(201,168,76,1)',
+    visual: 'texture',
+  },
+  {
+    id: 'NETWORKING',
+    label: '07 // NETWORK',
+    desc: 'Match packets synchronized. Multiplayer session prepared.',
+    color: 'rgba(201,168,76,1)',
+    visual: 'logic',
+  },
+  {
     id: 'ENGINE READY',
-    label: '05 // ENGINE',
+    label: '08 // ENGINE',
     desc: 'All subsystems nominal. Scene graph fully instantiated.',
     color: 'rgba(201,168,76,1)',
     visual: 'complete',
@@ -151,7 +172,7 @@ export default function EngineSection() {
         trigger: containerRef.current,
         start: 'top top',
         // Preserve the cinematic, pinned build-up without the original long hold.
-        end: `+=${ENGINE_SYSTEMS.length * 60}vh`,
+        end: `+=${ENGINE_SYSTEMS.length * 85}vh`,
         pin: pinRef.current,
         scrub: 0.55,
         onUpdate: (self) => {
