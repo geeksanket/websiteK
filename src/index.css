@@ -152,6 +152,25 @@ body {
   will-change: transform;
 }
 
+@media (max-width: 767px) {
+  .battlefield-heading {
+    position: absolute !important;
+    inset: 0 0 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 10.5rem;
+    padding: 2rem !important;
+    justify-content: flex-start !important;
+    background: linear-gradient(to bottom, #080808 68%, rgba(8, 8, 8, 0)) !important;
+    border-right: 0 !important;
+    pointer-events: none;
+  }
+
+  .battlefield-panel {
+    width: 100vw !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

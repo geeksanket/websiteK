@@ -1,17 +1,52 @@
 import { useState } from 'react'
 
-const TECH_TEAM = [
-  { name: 'Viral', codename: 'Virus', role: 'Engine Development' },
-  { name: 'Gauri', codename: 'IDK', role: 'Systems Architecture' },
-  { name: 'Sanket', codename: 'Supra', role: 'Core Technology' },
+type TeamMember = {
+  name: string
+  codename?: string
+  role: string
+  contact: {
+    email: string
+    github: string
+    linkedin: string
+  }
+}
+
+// Add real contact details here. Empty fields intentionally render as non-links.
+const TECH_TEAM: TeamMember[] = [
+  { name: 'Viral', codename: 'Virus', role: 'Tech / Programming', contact: { email: '', github: '', linkedin: '' } },
+  { name: 'Gauri', codename: 'IDK', role: 'Tech / Programming', contact: { email: '', github: '', linkedin: '' } },
+  { name: 'Sanket', codename: 'Supra', role: 'Tech / Programming', contact: { email: '', github: '', linkedin: '' } },
 ]
 
-const ART_TEAM = [
-  { name: 'Darshana', codename: 'Darshanova', role: 'Visual Design' },
-  { name: 'Neel', codename: 'Corporate', role: 'Art Direction' },
+const ART_TEAM: TeamMember[] = [
+  { name: 'Darshana', codename: 'Darshanova', role: 'Art', contact: { email: '', github: '', linkedin: '' } },
+  { name: 'Neel', role: 'Art', contact: { email: '', github: '', linkedin: '' } },
 ]
 
-function TechCard({ member }: { member: typeof TECH_TEAM[0] }) {
+function ContactArea({ contact }: { contact: TeamMember['contact'] }) {
+  const channels = [
+    { label: 'EMAIL', value: contact.email, href: contact.email ? `mailto:${contact.email}` : '' },
+    { label: 'GITHUB', value: contact.github, href: contact.github },
+    { label: 'LINKEDIN', value: contact.linkedin, href: contact.linkedin },
+  ]
+
+  return (
+    <div className="mt-5 pt-4 flex flex-wrap gap-x-4 gap-y-2" style={{ borderTop: '1px solid rgba(201,168,76,0.1)' }}>
+      {channels.map(channel => channel.href ? (
+        <a key={channel.label} href={channel.href} target="_blank" rel="noreferrer" className="font-mono-label text-[9px] tracking-widest" style={{ color: 'rgba(201,168,76,0.6)' }}>
+          {channel.label}
+        </a>
+      ) : null)}
+      {!channels.some(channel => channel.href) && (
+        <span className="font-mono-label text-[9px] tracking-widest" style={{ color: 'rgba(201,168,76,0.25)' }}>
+          CONTACT // ADD DETAILS
+        </span>
+      )}
+    </div>
+  )
+}
+
+function TechCard({ member }: { member: TeamMember }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -45,15 +80,10 @@ function TechCard({ member }: { member: typeof TECH_TEAM[0] }) {
 
       <div className="relative">
         {/* Codename (always visible) */}
-        <div
+        {member.codename && <div
           className="font-display font-bold tracking-[0.2em] mb-1 transition-all duration-300"
-          style={{
-            fontSize: '1.4rem',
-            color: hovered ? 'rgba(201,168,76,0.4)' : 'var(--gold)',
-          }}
-        >
-          {member.codename}
-        </div>
+          style={{ fontSize: '1.4rem', color: hovered ? 'rgba(201,168,76,0.4)' : 'var(--gold)' }}
+        >{member.codename}</div>}
 
         {/* Real name (on hover) */}
         <div
@@ -61,8 +91,8 @@ function TechCard({ member }: { member: typeof TECH_TEAM[0] }) {
           style={{
             fontSize: '1.1rem',
             color: 'var(--foreground)',
-            opacity: hovered ? 1 : 0,
-            transform: hovered ? 'translateY(0)' : 'translateY(8px)',
+            opacity: 1,
+            transform: 'translateY(0)',
           }}
         >
           {member.name}
@@ -87,12 +117,13 @@ function TechCard({ member }: { member: typeof TECH_TEAM[0] }) {
           {'> init_module("'}{member.name.toLowerCase()}{'");'}<br />
           {'> status: ONLINE'}
         </div>
+        <ContactArea contact={member.contact} />
       </div>
     </div>
   )
 }
 
-function ArtCard({ member }: { member: typeof ART_TEAM[0] }) {
+function ArtCard({ member }: { member: TeamMember }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -113,7 +144,7 @@ function ArtCard({ member }: { member: typeof ART_TEAM[0] }) {
       </svg>
 
       <div className="relative">
-        <div
+        {member.codename && <div
           className="font-display font-bold tracking-[0.2em] mb-1 transition-all duration-300"
           style={{
             fontSize: '1.4rem',
@@ -121,14 +152,14 @@ function ArtCard({ member }: { member: typeof ART_TEAM[0] }) {
           }}
         >
           {member.codename}
-        </div>
+        </div>}
         <div
           className="font-display font-bold tracking-widest transition-all duration-300"
           style={{
             fontSize: '1.1rem',
             color: 'var(--foreground)',
-            opacity: hovered ? 1 : 0,
-            transform: hovered ? 'translateY(0)' : 'translateY(8px)',
+            opacity: 1,
+            transform: 'translateY(0)',
           }}
         >
           {member.name}
@@ -144,6 +175,7 @@ function ArtCard({ member }: { member: typeof ART_TEAM[0] }) {
           palette: #c9a84c<br />
           {'brush: active // canvas_open'}
         </div>
+        <ContactArea contact={member.contact} />
       </div>
     </div>
   )

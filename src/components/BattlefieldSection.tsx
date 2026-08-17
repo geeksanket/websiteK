@@ -85,24 +85,35 @@ function PanelVisual({ index }: { index: number }) {
 
 export default function BattlefieldSection() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const panels = trackRef.current
-      if (!panels) return
-      const totalWidth = panels.scrollWidth - window.innerWidth
+      const container = containerRef.current
+      const heading = headingRef.current
+      if (!panels || !container || !heading) return
+
+      // The panels only have the space not occupied by the fixed heading.
+      // On mobile the heading overlays the track, so the full viewport is usable.
+      const getTravel = () => {
+        const headingOverlaysTrack = getComputedStyle(heading).position === 'absolute'
+        const availableWidth = container.clientWidth - (headingOverlaysTrack ? 0 : heading.offsetWidth)
+        return Math.max(0, panels.scrollWidth - availableWidth)
+      }
 
       gsap.to(panels, {
-        x: -totalWidth,
+        x: () => -getTravel(),
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          // Keep the cinematic horizontal reveal, but do not hold after the last panel.
-          end: `+=${totalWidth}`,
+          // Release precisely when the right edge of the final panel reaches the viewport edge.
+          end: () => `+=${getTravel()}`,
           scrub: 0.45,
           pin: true,
+          invalidateOnRefresh: true,
         },
       })
     }, containerRef)
@@ -111,10 +122,11 @@ export default function BattlefieldSection() {
 
   return (
     <section ref={containerRef} id="game" style={{ overflow: 'hidden' }}>
-      <div className="flex items-center" style={{ height: '100vh', overflow: 'hidden' }}>
+      <div className="battlefield-frame flex items-center" style={{ height: '100vh', overflow: 'hidden' }}>
         {/* Sticky heading */}
         <div
-          className="flex-shrink-0 flex flex-col justify-center px-10 md:px-16 relative z-10"
+          ref={headingRef}
+          className="battlefield-heading flex-shrink-0 flex flex-col justify-center px-10 md:px-16 relative z-10"
           style={{ width: 'clamp(260px, 28vw, 380px)', height: '100vh', borderRight: '1px solid rgba(201,168,76,0.08)', background: '#080808' }}
         >
           <div className="absolute inset-0 grid-overlay opacity-30" />
@@ -144,13 +156,13 @@ export default function BattlefieldSection() {
         {/* Horizontal scrolling panels */}
         <div
           ref={trackRef}
-          className="horizontal-track flex"
+          className="horizontal-track battlefield-track flex"
           style={{ height: '100vh' }}
         >
           {PANELS.map((panel, i) => (
             <div
               key={panel.label}
-              className="relative flex-shrink-0 flex flex-col justify-end overflow-hidden"
+              className="battlefield-panel relative flex-shrink-0 flex flex-col justify-end overflow-hidden"
               style={{ width: 'clamp(280px, 38vw, 480px)', height: '100vh', borderRight: '1px solid rgba(201,168,76,0.08)' }}
             >
               {/* Visual fill */}
