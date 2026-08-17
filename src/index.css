@@ -145,11 +145,6 @@ body {
   pointer-events: none;
 }
 
-/* Pin spacer overrides */
-.gsap-pin-spacer {
-  pointer-events: none;
-}
-
 /* Smooth horizontal scroll section */
 .horizontal-track {
   display: flex;

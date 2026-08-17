@@ -5,6 +5,9 @@ import path from 'node:path'
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig({
+  // Use relative asset URLs so the app works whether it is deployed at the
+  // domain root or beneath a platform/project subpath.
+  base: './',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
