@@ -150,10 +150,9 @@ export default function EngineSection() {
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: 'top top',
-        // Animate during the section's natural pass through the viewport.
-        // Pinning here was adding a large GSAP spacer after the content.
-        end: 'bottom top',
-        pin: false,
+        // Preserve the cinematic, pinned build-up without the original long hold.
+        end: `+=${ENGINE_SYSTEMS.length * 60}vh`,
+        pin: pinRef.current,
         scrub: 1,
         onUpdate: (self) => {
           const idx = Math.floor(self.progress * ENGINE_SYSTEMS.length)

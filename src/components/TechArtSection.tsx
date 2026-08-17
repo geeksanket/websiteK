@@ -14,9 +14,8 @@ export default function TechArtSection() {
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: 'top top',
-        // Let the final transition flow directly into the closing screen.
-        end: 'bottom top',
-        pin: false,
+        end: '+=75vh',
+        pin: pinRef.current,
         scrub: 1.2,
         onUpdate: (self) => setMerge(self.progress),
       })

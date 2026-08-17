@@ -89,9 +89,9 @@ export default function CodeToWorld() {
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: 'top top',
-        // No pin spacer: this section should flow straight into the battlefield.
-        end: 'bottom top',
-        pin: false,
+        // Keep the staged world-building sequence pinned and responsive.
+        end: `+=${STAGES.length * 60}vh`,
+        pin: pinRef.current,
         scrub: 1,
         onUpdate: (self) => {
           const idx = Math.floor(self.progress * STAGES.length)

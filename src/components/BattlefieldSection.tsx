@@ -99,11 +99,10 @@ export default function BattlefieldSection() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          // Run the horizontal reveal while this visible section scrolls normally.
-          // A pinned track reserved an empty spacer before the team section.
-          end: 'bottom top',
+          // Keep the cinematic horizontal reveal, but do not hold after the last panel.
+          end: `+=${totalWidth}`,
           scrub: 1.5,
-          pin: false,
+          pin: true,
         },
       })
     }, containerRef)
