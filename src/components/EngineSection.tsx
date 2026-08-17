@@ -153,10 +153,10 @@ export default function EngineSection() {
         // Preserve the cinematic, pinned build-up without the original long hold.
         end: `+=${ENGINE_SYSTEMS.length * 60}vh`,
         pin: pinRef.current,
-        scrub: 0.35,
+        scrub: 0.55,
         onUpdate: (self) => {
-          const idx = Math.floor(self.progress * ENGINE_SYSTEMS.length)
-          setActiveIndex(Math.min(idx, ENGINE_SYSTEMS.length - 1))
+          const idx = Math.min(Math.floor(self.progress * ENGINE_SYSTEMS.length), ENGINE_SYSTEMS.length - 1)
+          setActiveIndex(current => current === idx ? current : idx)
           if (progressRef.current) {
             progressRef.current.style.transform = `scaleY(${self.progress})`
           }

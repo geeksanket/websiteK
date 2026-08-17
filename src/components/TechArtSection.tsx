@@ -16,7 +16,7 @@ export default function TechArtSection() {
         start: 'top top',
         end: '+=75vh',
         pin: pinRef.current,
-        scrub: 0.4,
+        scrub: 0.55,
         onUpdate: (self) => setMerge(self.progress),
       })
     }, containerRef)
@@ -51,7 +51,7 @@ export default function TechArtSection() {
                 right: '50%',
                 marginRight: merge > 0.5 ? `${(merge - 0.5) * 80}px` : '40px',
                 transform: `translateX(${techX}px)`,
-                transition: 'transform 0.05s',
+                transition: 'transform 0.16s cubic-bezier(0.22, 1, 0.36, 1)',
                 opacity: 0.4 + merge * 0.6,
               }}
             >
@@ -99,7 +99,7 @@ export default function TechArtSection() {
                 left: '50%',
                 marginLeft: merge > 0.5 ? `${(merge - 0.5) * 80}px` : '40px',
                 transform: `translateX(${artX}px)`,
-                transition: 'transform 0.05s',
+                transition: 'transform 0.16s cubic-bezier(0.22, 1, 0.36, 1)',
                 opacity: 0.4 + merge * 0.6,
               }}
             >

@@ -92,10 +92,10 @@ export default function CodeToWorld() {
         // Keep the staged world-building sequence pinned and responsive.
         end: `+=${STAGES.length * 60}vh`,
         pin: pinRef.current,
-        scrub: 0.35,
+        scrub: 0.55,
         onUpdate: (self) => {
-          const idx = Math.floor(self.progress * STAGES.length)
-          setStageIndex(Math.min(idx, STAGES.length - 1))
+          const idx = Math.min(Math.floor(self.progress * STAGES.length), STAGES.length - 1)
+          setStageIndex(current => current === idx ? current : idx)
         },
       })
     }, containerRef)

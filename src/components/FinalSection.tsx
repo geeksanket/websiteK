@@ -28,7 +28,7 @@ export default function FinalSection() {
           trigger: containerRef.current,
           start: 'top bottom',
           end: 'center center',
-          scrub: 0.4,
+          scrub: 0.55,
         },
       })
       tl.fromTo(titleRef.current, { opacity: 0, y: 72, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, ease: 'power2.out', duration: 1 }, 0)

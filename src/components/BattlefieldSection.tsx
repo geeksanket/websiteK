@@ -111,7 +111,7 @@ export default function BattlefieldSection() {
           start: 'top top',
           // Release precisely when the right edge of the final panel reaches the viewport edge.
           end: () => `+=${getTravel()}`,
-          scrub: 0.45,
+          scrub: 0.65,
           pin: true,
           invalidateOnRefresh: true,
         },

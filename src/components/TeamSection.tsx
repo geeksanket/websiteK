@@ -13,14 +13,14 @@ type TeamMember = {
 
 // Add real contact details here. Empty fields intentionally render as non-links.
 const TECH_TEAM: TeamMember[] = [
-  { name: 'Viral', codename: 'Virus', role: 'Tech / Programming', contact: { email: '', github: '', linkedin: '' } },
-  { name: 'Gauri', codename: 'IDK', role: 'Tech / Programming', contact: { email: '', github: '', linkedin: '' } },
-  { name: 'Sanket', codename: 'Supra', role: 'Tech / Programming', contact: { email: '', github: '', linkedin: '' } },
+  { name: 'Viral', codename: 'Virus', role: 'Tech / Programming', contact: { email: 'viralbobde2006@gmail.com', github: '', linkedin: '' } },
+  { name: 'Gauri', codename: 'Dhurandar', role: 'Tech / Programming', contact: { email: 'gaurich7055@gmail.com', github: '', linkedin: '' } },
+  { name: 'Sanket', codename: 'Miau', role: 'Tech / Programming', contact: { email: 'sanketparadkar10@gmail.com', github: '', linkedin: '' } },
 ]
 
 const ART_TEAM: TeamMember[] = [
-  { name: 'Darshana', codename: 'Darshanova', role: 'Art', contact: { email: '', github: '', linkedin: '' } },
-  { name: 'Neel', role: 'Art', contact: { email: '', github: '', linkedin: '' } },
+  { name: 'Darshana', codename: 'All Rounder', role: 'Art', contact: { email: 'tdarshana2005@gmail.com', github: '', linkedin: '' } },
+  { name: 'Neel', codename: 'Corporate', role: 'Art', contact: { email: 'neeltawre9@gmail.com', github: '', linkedin: '' } },
 ]
 
 function ContactArea({ contact }: { contact: TeamMember['contact'] }) {

@@ -19,7 +19,7 @@ export default function App() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const lenis = new Lenis({
       // Short easing keeps the tactile smoothness without visibly trailing the wheel.
-      duration: reduceMotion ? 0 : 0.8,
+      duration: reduceMotion ? 0 : 0.95,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     })
