@@ -16,8 +16,10 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const lenis = new Lenis({
-      duration: 1.4,
+      // Short easing keeps the tactile smoothness without visibly trailing the wheel.
+      duration: reduceMotion ? 0 : 0.8,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     })
@@ -30,6 +32,10 @@ export default function App() {
 
     gsap.ticker.add(onTick)
     gsap.ticker.lagSmoothing(0)
+
+    const refresh = () => ScrollTrigger.refresh()
+    requestAnimationFrame(refresh)
+    document.fonts?.ready.then(refresh)
 
     return () => {
       lenis.destroy()

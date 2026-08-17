@@ -101,7 +101,7 @@ export default function BattlefieldSection() {
           start: 'top top',
           // Keep the cinematic horizontal reveal, but do not hold after the last panel.
           end: `+=${totalWidth}`,
-          scrub: 1.5,
+          scrub: 0.45,
           pin: true,
         },
       })

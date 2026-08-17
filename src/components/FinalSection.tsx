@@ -17,31 +17,24 @@ const PARTICLES_FINAL = Array.from({ length: 80 }, (_, i) => ({
 export default function FinalSection() {
   const titleRef = useRef<HTMLDivElement>(null)
   const taglineRef = useRef<HTMLDivElement>(null)
+  const particlesRef = useRef<SVGSVGElement>(null)
+  const glowRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(titleRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1.4,
-        ease: 'power3.out',
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 70%',
+          start: 'top bottom',
+          end: 'center center',
+          scrub: 0.4,
         },
       })
-      gsap.from(taglineRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 1.2,
-        ease: 'power2.out',
-        delay: 0.5,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 70%',
-        },
-      })
+      tl.fromTo(titleRef.current, { opacity: 0, y: 72, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, ease: 'power2.out', duration: 1 }, 0)
+        .fromTo(taglineRef.current, { opacity: 0, y: 28 }, { opacity: 1, y: 0, ease: 'power2.out', duration: 0.7 }, 0.22)
+        .fromTo(particlesRef.current, { opacity: 0, y: 28 }, { opacity: 1, y: 0, ease: 'none', duration: 1 }, 0)
+        .fromTo(glowRef.current, { opacity: 0.15, scale: 0.9 }, { opacity: 1, scale: 1, ease: 'none', duration: 1 }, 0)
     }, containerRef)
     return () => ctx.revert()
   }, [])
@@ -54,7 +47,7 @@ export default function FinalSection() {
         style={{ minHeight: '100vh', background: '#080808' }}
       >
         {/* Particles */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+        <svg ref={particlesRef} className="absolute inset-0 w-full h-full pointer-events-none will-change-transform">
           {PARTICLES_FINAL.map(p => (
             <circle key={p.id} cx={`${p.x}%`} cy={`${p.y}%`} r={p.size} fill="rgba(201,168,76,0.6)" opacity={p.opacity}>
               <animate attributeName="opacity" values={`${p.opacity};${p.opacity * 0.2};${p.opacity}`} dur={`${p.dur}s`} begin={`${p.delay}s`} repeatCount="indefinite" />
@@ -64,8 +57,9 @@ export default function FinalSection() {
 
         {/* Radial glow */}
         <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(139,105,20,0.12) 0%, transparent 70%)' }}
+          ref={glowRef}
+          className="absolute inset-0 pointer-events-none will-change-transform"
+          style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(139,105,20,0.12) 0%, transparent 70%)', transformOrigin: 'center' }}
         />
 
         {/* Perspective horizon lines */}

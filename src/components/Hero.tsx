@@ -52,7 +52,7 @@ export default function Hero() {
           trigger: containerRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1.2,
+          scrub: 0.35,
           pin: false,
         },
       })

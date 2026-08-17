@@ -16,7 +16,7 @@ export default function TechArtSection() {
         start: 'top top',
         end: '+=75vh',
         pin: pinRef.current,
-        scrub: 1.2,
+        scrub: 0.4,
         onUpdate: (self) => setMerge(self.progress),
       })
     }, containerRef)
